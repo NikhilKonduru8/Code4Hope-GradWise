@@ -3,7 +3,7 @@
 **Date:** 06/28/25  
 **Category:** Education
 
-This is our [WebAPP Link](https://gradwiseprep.vercel.app/auth/login).
+**This is our** [WebAPP Link](https://gradwiseprep.vercel.app/auth/login).
 
 ## Team Members
 - **Nikhil Konduru** – Foothill High School  
