@@ -2,7 +2,7 @@ from google import genai
 from rich.console import Console
 from rich.markdown import Markdown
 
-client = genai.Client(api_key="AIzaSyAzUhIVNpyjc4tx3K6wKTYiIn6OIExr_4E")
+client = genai.Client(api_key="APIKEY")
 
 text = input("What area do you live in and what is your income bracket? ")
 
