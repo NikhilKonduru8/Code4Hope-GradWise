@@ -1,7 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { createClient } from "@/lib/supabase-server"
 
-const GEMINI_API_KEY = "APIKEY"
+const GEMINI_API_KEY = "APIKEY" // Calling Gemini API with API Key (removed here for privacy reasons)
 
 export async function POST(request: NextRequest) {
   try {
@@ -10,7 +10,7 @@ export async function POST(request: NextRequest) {
     console.log("Received request:", { location, incomeBracket })
 
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${GEMINI_API_KEY}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${GEMINI_API_KEY}`, // fetching response from Gemini API
       {
         method: "POST",
         headers: {
@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
           contents: [
             {
               parts: [
-                {
+                { // Giving Gemini a prompt with specific formatting so that our code can retrieve the response to format it into cards.
                   text: `Provide exactly 5 specific college recommendations near ${location} for a student in the ${incomeBracket} income bracket. Focus on financial accessibility and strong support systems.
 
 Format your response with exactly 5 colleges, each clearly separated and numbered:
@@ -102,8 +102,8 @@ Provide exactly 5 colleges with no introductory text.`,
 
     console.log("Generated recommendations successfully")
 
-    // Save to database with improved error handling
-    try {
+    // Save recommendations to Supabase DB
+    try { 
       const supabase = await createClient()
       console.log("Created Supabase client")
 
@@ -158,7 +158,7 @@ Provide exactly 5 colleges with no introductory text.`,
 
       console.log("College recommendations saved successfully:", savedRecommendation)
 
-      // Track progress (optional - don't fail if this doesn't work)
+      // Track progress (optional - don't fail if this doesn't work) to show on dashboard
       try {
         // Check if user_progress table exists first
         const { data: tableCheck, error: tableError } = await supabase.from("user_progress").select("id").limit(1)
@@ -181,7 +181,7 @@ Provide exactly 5 colleges with no introductory text.`,
             .from("user_progress")
             .insert(progressData)
             .select()
-
+    
           if (progressError) {
             console.error("Error saving progress (non-critical):", {
               error: progressError,
