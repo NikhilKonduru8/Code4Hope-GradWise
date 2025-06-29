@@ -1,7 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { createClient } from "@/lib/supabase-server"
 
-const GEMINI_API_KEY = "APIKEY"
+const GEMINI_API_KEY = "APIKEY" // setting Gemini API key variable (removed here for privacy)
 
 export async function POST(request: NextRequest) {
   try {
@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
     console.log("Received essay evaluation request, word count:", essayText.trim().split(/\s+/).length)
 
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${GEMINI_API_KEY}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${GEMINI_API_KEY}`, // fetching response from Gemini
       {
         method: "POST",
         headers: {
@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
           contents: [
             {
               parts: [
-                {
+                { // Prompt + essay feedback format and guidelines
                   text: `Evaluate this college essay and provide concise, actionable feedback in under 300 words.
 
 Essay: "${essayText}"
@@ -68,7 +68,7 @@ Keep it concise, specific, and actionable. Focus on the most important points on
 
     console.log("Generated essay feedback successfully")
 
-    // Save to database with improved error handling
+    // Save to Supabase DB
     try {
       const supabase = await createClient()
       console.log("Created Supabase client")
