@@ -1,4 +1,4 @@
-# GradWise College Prep
+# GradWise College Prep (Top 15 Finalist)
 
 **Date:** 06/28/25  
 **Category:** Education
